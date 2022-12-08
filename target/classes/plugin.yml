@@ -1,0 +1,8 @@
+name: Freeze
+version: '1.0-SNAPSHOT'
+main: chat.belinked.freeze.Freeze
+api-version: 1.19
+authors: [ jobebe07 ]
+commands:
+  freeze:
+    description: A command for admins to freeze players
