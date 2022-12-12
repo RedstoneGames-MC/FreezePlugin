@@ -28,8 +28,6 @@ import static chat.belinked.freeze.FreezeAPI.unfreezePlayer;
 
 public final class Freeze extends JavaPlugin implements TabExecutor, Listener {
 
-    public static List<UUID> frozenPlayers = new ArrayList<>();
-
     public final static String PREFIX_MAIN = "§6§lRedstoneGames §r§0» §r";
     public final static String PREFIX_ERROR = "§6§lRedstoneGames §r§4ERROR §0» §r";
     public static Freeze instance;
@@ -84,20 +82,20 @@ public final class Freeze extends JavaPlugin implements TabExecutor, Listener {
 
                 switch(args[0]) {
                     case "enable":
-                        if(!frozenPlayers.contains(target.getUniqueId())) {
+                        if(!FreezeAPI.frozenPlayers.contains(target.getUniqueId())) {
                             FreezeAPI.freezePlayer(target);
                             sender.sendMessage(PREFIX_MAIN + "Successfully freezed player " + target.getName() + "!");
-                            Freeze.frozenPlayers.add(p.getUniqueId());
+                            FreezeAPI.frozenPlayers.add(p.getUniqueId());
 
                         } else {
                             sender.sendMessage(PREFIX_MAIN + "This player is already frozen!");
                         }
                         break;
                     case "disable":
-                        if(frozenPlayers.contains(target.getUniqueId())) {
+                        if(FreezeAPI.frozenPlayers.contains(target.getUniqueId())) {
                             FreezeAPI.unfreezePlayer(target);
                             sender.sendMessage(PREFIX_MAIN + "Successfully unfreezed player " + target.getName() + "!");
-                            Freeze.frozenPlayers.remove(p.getUniqueId());
+                            FreezeAPI.frozenPlayers.remove(p.getUniqueId());
 
                         } else {
                             sender.sendMessage(PREFIX_MAIN + "This player is not frozen!");
@@ -105,19 +103,19 @@ public final class Freeze extends JavaPlugin implements TabExecutor, Listener {
                         break;
                     case "toggle":
                         FreezeAPI.toggleFreeze(p);
-                        if(frozenPlayers.contains(p.getUniqueId())) {
-                            Freeze.frozenPlayers.remove(p.getUniqueId());
+                        if(FreezeAPI.frozenPlayers.contains(p.getUniqueId())) {
+                            FreezeAPI.frozenPlayers.remove(p.getUniqueId());
                         } else {
-                            Freeze.frozenPlayers.add(p.getUniqueId());
+                            FreezeAPI.frozenPlayers.add(p.getUniqueId());
                         }
                         sender.sendMessage(PREFIX_MAIN + "Successfully toggled player " + target.getName() + "!");
                         break;
                 }
             } else if(args[0].equals("clear")) {
                 for(Player player : Bukkit.getOnlinePlayers()) {
-                    if(frozenPlayers.contains(player.getUniqueId())) {
+                    if(FreezeAPI.frozenPlayers.contains(player.getUniqueId())) {
                         unfreezePlayer(player);
-                        Freeze.frozenPlayers.remove(p.getUniqueId());
+                        FreezeAPI.frozenPlayers.remove(p.getUniqueId());
                     }
                 }
                 for(Entity en : p.getWorld().getEntities()) {
@@ -161,7 +159,7 @@ public final class Freeze extends JavaPlugin implements TabExecutor, Listener {
                 }
             }
             if(args[0].equals("disable")) {
-                for(UUID uid : frozenPlayers) {
+                for(UUID uid : FreezeAPI.frozenPlayers) {
                     Player p = Bukkit.getPlayer(uid);
                     if(p.getName().startsWith(args[1])) {
                         completions.add(p.getName());
@@ -174,21 +172,21 @@ public final class Freeze extends JavaPlugin implements TabExecutor, Listener {
 
     @EventHandler
     public void onDismount(PlayerToggleSneakEvent e) {
-        if(frozenPlayers.contains(e.getPlayer().getUniqueId())) {
+        if(FreezeAPI.frozenPlayers.contains(e.getPlayer().getUniqueId())) {
             e.setCancelled(true);
         }
     }
 
     @EventHandler
     public void onDisconnect(PlayerQuitEvent e) {
-        if(frozenPlayers.contains(e.getPlayer().getUniqueId())) {
+        if(FreezeAPI.frozenPlayers.contains(e.getPlayer().getUniqueId())) {
             FreezeAPI.unfreezePlayer(e.getPlayer());
         }
     }
 
     @EventHandler
     public void onConnect(PlayerJoinEvent e) {
-        if(frozenPlayers.contains(e.getPlayer().getUniqueId())) {
+        if(FreezeAPI.frozenPlayers.contains(e.getPlayer().getUniqueId())) {
             new BukkitRunnable() {
                 public void run() {
                     FreezeAPI.freezePlayer(e.getPlayer());

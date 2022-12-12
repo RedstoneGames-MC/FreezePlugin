@@ -12,10 +12,14 @@ import org.bukkit.entity.ArmorStand;
 import org.bukkit.entity.EntityType;
 import org.bukkit.entity.Player;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.UUID;
 
 public class FreezeAPI {
+
+    public static List<UUID> frozenPlayers = new ArrayList<>();
     public static String FREEZE_STAND_TAG = "freezeStand";
     private static HashMap<UUID, ArmorStand> entities = new HashMap<>();
     private static HashMap<UUID, NPC.Global> npcs = new HashMap<>();
@@ -82,7 +86,7 @@ public class FreezeAPI {
     }
 
     public static void toggleFreeze(Player p) {
-        if(Freeze.frozenPlayers.contains(p.getUniqueId())) {
+        if(FreezeAPI.frozenPlayers.contains(p.getUniqueId())) {
             unfreezePlayer(p);
         } else {
             freezePlayer(p);
