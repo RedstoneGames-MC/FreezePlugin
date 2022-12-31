@@ -3,6 +3,7 @@ package chat.belinked.freeze;
 import chat.belinked.freeze.commands.FreezeCommand;
 import chat.belinked.freeze.events.FreezeEvents;
 import dev.sergiferry.playernpc.api.NPCLib;
+import org.bukkit.Bukkit;
 import org.bukkit.command.TabExecutor;
 import org.bukkit.plugin.java.JavaPlugin;
 

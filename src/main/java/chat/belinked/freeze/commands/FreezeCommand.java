@@ -1,7 +1,7 @@
 package chat.belinked.freeze.commands;
 
 import chat.belinked.freeze.Freeze;
-import chat.belinked.freeze.FreezeAPI;
+import chat.belinked.freeze.utils.FreezeAPI;
 import dev.sergiferry.playernpc.api.NPC;
 import dev.sergiferry.playernpc.api.NPCLib;
 import org.bukkit.Bukkit;
@@ -15,12 +15,12 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
-import static chat.belinked.freeze.FreezeAPI.unfreezePlayer;
+import static chat.belinked.freeze.utils.FreezeAPI.unfreezePlayer;
 
 public class FreezeCommand implements TabExecutor {
     public boolean onCommand(CommandSender sender, Command cmd, String label, String args[]) {
         if(!(sender instanceof Player)) return true;
-        if(!sender.isOp()) {
+        if(!sender.hasPermission("freeze.freeze")) {
             sender.sendMessage(Freeze.PREFIX_ERROR + "Insufficient permissions!");
             return true;
         }

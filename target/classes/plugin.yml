@@ -6,3 +6,8 @@ authors: [ jobebe07 ]
 commands:
   freeze:
     description: A command for admins to freeze players
+    permission: freeze.freeze
+
+permissions:
+  freeze.freeze:
+    default: op

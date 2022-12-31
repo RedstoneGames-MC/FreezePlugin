@@ -1,5 +1,6 @@
-package chat.belinked.freeze;
+package chat.belinked.freeze.utils;
 
+import chat.belinked.freeze.Freeze;
 import com.mojang.authlib.GameProfile;
 import com.mojang.authlib.properties.Property;
 import dev.sergiferry.playernpc.api.NPC;
@@ -19,6 +20,7 @@ import java.util.UUID;
 
 public class FreezeAPI {
 
+    public static List<UUID> offlineFrozenPlayers = new ArrayList<>();
     public static List<UUID> frozenPlayers = new ArrayList<>();
     public static String FREEZE_STAND_TAG = "freezeStand";
     private static HashMap<UUID, ArmorStand> entities = new HashMap<>();
