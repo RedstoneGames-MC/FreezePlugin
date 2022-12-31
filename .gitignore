@@ -13,6 +13,9 @@
 # IntelliJ Files
 .idea/
 
+# Compiled files
+.target/
+
 # Package Files #
 *.war
 *.nar
