@@ -1,1 +1,0 @@
-This plugin requires the PlayerNPC.jar to be in the plugin directory as well
