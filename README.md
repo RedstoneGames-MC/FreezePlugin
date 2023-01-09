@@ -1,13 +1,11 @@
 # Freeze Plugin
 
----
-
 Plugin with integrated API to freeze players cleanly.
 
 ### Features
 
 + Clean freeze using spectator targets
-+ Seperate freeze permission
++ Seperate freeze permission ``freeze.freeze``
 + Players are still frozen even if they disconnect
 
 ### Usage

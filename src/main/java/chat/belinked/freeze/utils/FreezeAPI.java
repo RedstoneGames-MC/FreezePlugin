@@ -23,6 +23,7 @@ public class FreezeAPI {
     public static List<UUID> offlineFrozenPlayers = new ArrayList<>();
     public static List<UUID> frozenPlayers = new ArrayList<>();
     public static String FREEZE_STAND_TAG = "freezeStand";
+    public static String FROZEN_PLAYER_TAG = "frozen";
     private static HashMap<UUID, ArmorStand> entities = new HashMap<>();
     private static HashMap<UUID, NPC.Global> npcs = new HashMap<>();
 
@@ -70,7 +71,7 @@ public class FreezeAPI {
         FreezeAPI.entities.put(p.getUniqueId(), a);
         FreezeAPI.npcs.put(p.getUniqueId(), npc);
 
-
+        p.addScoreboardTag(FROZEN_PLAYER_TAG);
         p.setGameMode(GameMode.SPECTATOR);
         p.setSpectatorTarget(a);
         p.sendTitle(ChatColor.AQUA + "You were frozen", "", 10, 40, 10);
@@ -83,7 +84,7 @@ public class FreezeAPI {
         FreezeAPI.npcs.get(p.getUniqueId()).destroy();
         FreezeAPI.npcs.remove(p.getUniqueId());
 
-
+        p.removeScoreboardTag(FROZEN_PLAYER_TAG);
         p.setGameMode(GameMode.SURVIVAL);
     }
 
